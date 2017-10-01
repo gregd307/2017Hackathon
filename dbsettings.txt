@@ -1,0 +1,5 @@
+User Id=sa
+Password=sqlserver
+
+Host= localhost
+DBname: projectManagment
