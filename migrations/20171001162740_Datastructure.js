@@ -8,7 +8,7 @@ exports.up = function(knex, Promise) {
                 skillsTable.increments();
 
                 // Data
-                skillsTable.string( 'skillname', 50 ).notNullable();
+                skillsTable.string( 'skillname', 50 ).notNullable().unique();
 
                 skillsTable.timestamp( 'created_at' ).notNullable();
 
@@ -20,11 +20,11 @@ exports.up = function(knex, Promise) {
                 usersTable.increments();
 
                 // Data
-                usersTable.string( 'name', 50 ).notNullable();
+                usersTable.string( 'name', 50 ).notNullable().unique();
                 usersTable.string( 'email', 250 ).notNullable().unique();
                 usersTable.string( 'password', 128 ).notNullable();
                 usersTable.string( 'racfid', 50 ).notNullable().unique();
-                usersTable.money( 'hourlyrate', 50 ).notNullable().unique();
+                usersTable.decimal( 'hourlyrate', 50 ).notNullable();
 
                 usersTable.timestamp( 'created_at' ).notNullable();
 
@@ -36,13 +36,13 @@ exports.up = function(knex, Promise) {
                 projectsTable.increments();
 
                 // Data
-                projectsTable.string( 'projectname', 50 ).notNullable();
-                projectsTable.date( 'startdate', 50 ).notNullable().unique();
-                projectsTable.date( 'deadline', 250 ).notNullable().unique();
-                projectsTable.money( 'totalcost', 128 ).notNullable();
-                projectsTable.string( 'epicbucket', 50 ).notNullable().unique();
-                projectsTable.boolean( 'iscomplete', 50 ).notNullable().unique();
-                projectsTable.boolean( 'isfunded', 50 ).notNullable().unique();
+                projectsTable.string( 'projectname', 50 ).notNullable().unique();
+                projectsTable.date( 'startdate', 50 ).notNullable();
+                projectsTable.date( 'deadline', 250 ).nullable();
+                projectsTable.decimal( 'totalcost', 128 ).nullable();
+                projectsTable.string( 'epicbucket', 50 ).nullable();
+                projectsTable.boolean( 'iscomplete', 50 ).defaultTo( false );
+                projectsTable.boolean( 'isfunded', 50 ).defaultTo( false );
 
                 projectsTable.timestamp( 'created_at' ).notNullable();
 
